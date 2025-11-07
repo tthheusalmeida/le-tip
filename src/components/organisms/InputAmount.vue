@@ -85,10 +85,9 @@ function onKeyDown(e: KeyboardEvent) {
 
 <template>
   <div class="input-money">
-    <label class="input-money__label">Valor</label>
+    <span class="input-money__label">Valor</span>
+    <component v-if="icon" :is="icon" class="input-money__icon" />
     <div class="input-money__wrapper">
-      <component v-if="icon" :is="icon" class="input-money__icon" />
-
       <input
         ref="inputRef"
         type="text"
@@ -106,14 +105,13 @@ function onKeyDown(e: KeyboardEvent) {
 <style scoped lang="css">
 .input-money {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem;
+  align-items: center;
   width: 100%;
+  max-width: 100%;
+  gap: 0.5rem;
 
   &__label {
     font-size: 0.875rem;
-    width: 80px;
     font-weight: 500;
     color: #374151;
   }
@@ -121,12 +119,16 @@ function onKeyDown(e: KeyboardEvent) {
   &__wrapper {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
     padding: 0.75rem 1rem;
     border: 1px solid #d1d5db;
     border-radius: 0.5rem;
     background-color: #ffffff;
-    transition: border-color 0.2s;
+    transition:
+      border-color 0.2s,
+      outline 0.2s;
   }
 
   &__wrapper:focus-within {
@@ -136,18 +138,20 @@ function onKeyDown(e: KeyboardEvent) {
 
   &__icon {
     flex-shrink: 0;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 2rem;
+    height: 2rem;
     color: #6b7280;
   }
 
   &__field {
     flex: 1;
+    min-width: 0;
     border: none;
     outline: none;
     font-size: 1rem;
     color: #111827;
     background-color: transparent;
+    text-align: right;
   }
 
   &__field::placeholder {

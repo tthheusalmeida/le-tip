@@ -29,7 +29,7 @@ const { currency, toggleCurrency } = useCurrency()
 <style scoped>
 .currency-switch {
   position: relative;
-  width: 280px;
+  width: 80dvw;
   height: 64px;
   border-radius: 32px;
   cursor: pointer;

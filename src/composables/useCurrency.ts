@@ -13,10 +13,10 @@ export function useCurrency() {
 }
 
 export function useCurrencyProvider() {
-  const currency = ref<Currency>(CURRENCY.EUR as string)
+  const currency = ref<Currency>(CURRENCY.EUR)
 
   function toggleCurrency() {
-    currency.value = (currency.value === CURRENCY.EUR ? CURRENCY.USD : CURRENCY.EUR) as string
+    currency.value = currency.value === CURRENCY.EUR ? CURRENCY.USD : CURRENCY.EUR
   }
 
   provide(currencyKey, { currency, toggleCurrency })

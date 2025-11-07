@@ -1,68 +1,84 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useCurrencyProvider } from '@/composables/useCurrency'
+import { useAppProvider } from './composables/useApp'
 
 import HeaderComponent from './components/molecules/HeaderComponent.vue'
-import SwitchCurrency from './components/organisms/SwitchCurrency.vue'
-import InputAmount from './components/organisms/InputAmount.vue'
-import InputRange, { type FormatterFn } from './components/organisms/InputRange.vue'
 import ButtonFloating from './components/organisms/ButtonFloating.vue'
+import EntryPanel from './components/organisms/EntryPanel.vue'
 
 useCurrencyProvider()
+useAppProvider()
 
-const amount = ref<number>(0)
-const tip = ref<number>(10)
-const people = ref<number>(2)
+const isSecondTab = ref<boolean>(false)
+const isDesktop = ref<boolean>(false)
 
-const formatAsPercentage: FormatterFn = (value: number) => {
-  return `${value}%`
+function toggleTab() {
+  if (isDesktop.value) return
+  isSecondTab.value = !isSecondTab.value
 }
 
-const formatAsNumber: FormatterFn = (value: number) => {
-  return String(Math.floor(value))
+function handleResize() {
+  isDesktop.value = window.innerWidth >= 768
 }
+
+window.addEventListener('resize', handleResize)
+handleResize()
 </script>
 
 <template>
   <div class="app">
     <HeaderComponent />
 
-    <main class="app__input-panel">
-      <SwitchCurrency />
+    <main class="app__main">
+      <div class="app__slides" :class="{ 'app__slides--second': isSecondTab && !isDesktop }">
+        <EntryPanel />
 
-      <InputAmount v-model:amount="amount" />
-      <InputRange
-        v-model="tip"
-        label="Gorjeta"
-        :min="5"
-        :max="20"
-        :step="1"
-        :formatter="formatAsPercentage"
-      />
-      <InputRange
-        v-model="people"
-        label="Pessoas"
-        :min="2"
-        :max="30"
-        :step="1"
-        :formatter="formatAsNumber"
-      />
+        <section class="app__slide">
+          <p style="color: black; text-align: center">Segunda aba</p>
+        </section>
+      </div>
     </main>
 
-    <ButtonFloating />
+    <ButtonFloating v-if="!isDesktop" :rotated="isSecondTab" @click="toggleTab" />
   </div>
 </template>
 
 <style scoped lang="css">
 .app {
   padding: 1rem;
+  overflow: hidden;
 
-  &__input-panel {
+  &__main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__slides {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+    justify-content: space-between;
+    width: 200%;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(0);
+
+    &--second {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .app__slides {
+    transform: translateX(0) !important;
+    width: 100%;
+  }
+
+  .app__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 }
 </style>
