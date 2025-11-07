@@ -15,7 +15,7 @@
       v-model="people"
       label="Pessoas"
       :min="2"
-      :max="30"
+      :max="16"
       :step="1"
       :formatter="formatAsNumber"
     />

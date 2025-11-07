@@ -6,6 +6,7 @@ import { useAppProvider } from './composables/useApp'
 import HeaderComponent from './components/molecules/HeaderComponent.vue'
 import ButtonFloating from './components/organisms/ButtonFloating.vue'
 import EntryPanel from './components/organisms/EntryPanel.vue'
+import ResultPanel from './components/organisms/ResultPanel.vue'
 
 useCurrencyProvider()
 useAppProvider()
@@ -34,9 +35,7 @@ handleResize()
       <div class="app__slides" :class="{ 'app__slides--second': isSecondTab && !isDesktop }">
         <EntryPanel />
 
-        <section class="app__slide">
-          <p style="color: black; text-align: center">Segunda aba</p>
-        </section>
+        <ResultPanel />
       </div>
     </main>
 
