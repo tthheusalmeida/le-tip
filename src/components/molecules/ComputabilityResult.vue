@@ -3,25 +3,26 @@
     <span class="computability-result__title">{{ title }}</span>
     <div class="computability-result__result">
       <component v-if="icon" :is="icon" class="computability-result__icon" />
-      <span class="computability-result__value">{{ value }}</span>
+      <span class="computability-result__value">{{ formattedValue }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  title: string
-  value: number
-}>()
-
 import { computed } from 'vue'
 import { useCurrency } from '@/composables/useCurrency'
 import { CURRENCY } from '@/utils/consts'
 import { BiEuro, BiDollar } from 'vue3-icons/bi'
 
-const { currency } = useCurrency()
+const props = defineProps<{
+  title: string
+  value: number
+}>()
 
+const { currency } = useCurrency()
 const icon = computed(() => (currency.value === CURRENCY.EUR ? BiEuro : BiDollar))
+
+const formattedValue = computed(() => props.value.toFixed(2))
 </script>
 
 <style scoped lang="css">

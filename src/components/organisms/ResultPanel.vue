@@ -1,9 +1,9 @@
 <template>
   <section class="result-panel">
     <ComputabilityResult title="Conta" :value="amount" />
-    <ComputabilityResult title="Gorjeta" :value="tipAmount" />
-    <ComputabilityResult title="Total" :value="amount + tipAmount" />
-    <ComputabilityResult title="por Pessoa" :value="perPerson" />
+    <ComputabilityResult title="Gorjeta" :value="amountTip" />
+    <ComputabilityResult title="Total" :value="amountTotal" />
+    <ComputabilityResult title="por Pessoa" :value="amountPerPerson" />
   </section>
 </template>
 
@@ -14,12 +14,13 @@ import { computed } from 'vue'
 
 const { amount, tip, people } = useApp()
 
-console.log(amount.value * (tip.value / 100))
+const roundTo = (value: number, decimals = 2) => Math.round(value * 10 ** decimals) / 10 ** decimals
 
-const tipAmount = computed(() =>
-  amount.value !== 0 && tip.value / 100 !== 0 ? Math.ceil(amount.value * tip.value) / 100 : 0,
+const amountTip = computed(() =>
+  amount.value !== 0 && tip.value / 100 !== 0 ? roundTo((amount.value * tip.value) / 100) : 0,
 )
-const perPerson = computed(() => (amount.value + tipAmount.value) / people.value)
+const amountTotal = computed(() => roundTo(amount.value + amountTip.value))
+const amountPerPerson = computed(() => roundTo(amountTotal.value / people.value))
 </script>
 
 <style scoped lang="css">
