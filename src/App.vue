@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import { useCurrencyProvider } from '@/composables/useCurrency'
 
 import HeaderComponent from './components/molecules/HeaderComponent.vue'
-import CurrencySwitch from './components/organisms/CurrencySwitch.vue'
-import AmountInput from './components/organisms/AmountInput.vue'
+import SwitchCurrency from './components/organisms/SwitchCurrency.vue'
+import InputAmount from './components/organisms/InputAmount.vue'
 
 useCurrencyProvider()
 
@@ -16,9 +16,9 @@ const amount = ref<number>(0)
     <HeaderComponent />
 
     <main class="app__input-panel">
-      <CurrencySwitch />
+      <SwitchCurrency />
 
-      <AmountInput v-model:amount="amount" />
+      <InputAmount v-model:amount="amount" />
     </main>
   </div>
 </template>
