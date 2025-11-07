@@ -6,6 +6,7 @@ import HeaderComponent from './components/molecules/HeaderComponent.vue'
 import SwitchCurrency from './components/organisms/SwitchCurrency.vue'
 import InputAmount from './components/organisms/InputAmount.vue'
 import InputRange, { type FormatterFn } from './components/organisms/InputRange.vue'
+import ButtonFloating from './components/organisms/ButtonFloating.vue'
 
 useCurrencyProvider()
 
@@ -47,6 +48,8 @@ const formatAsNumber: FormatterFn = (value: number) => {
         :formatter="formatAsNumber"
       />
     </main>
+
+    <ButtonFloating />
   </div>
 </template>
 
