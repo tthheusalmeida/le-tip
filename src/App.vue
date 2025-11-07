@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useCurrencyProvider } from '@/composables/useCurrency'
 
 import HeaderComponent from './components/molecules/HeaderComponent.vue'
 import CurrencySwitch from './components/organisms/CurrencySwitch.vue'
+import AmountInput from './components/organisms/AmountInput.vue'
 
 useCurrencyProvider()
+
+const amount = ref<number>(0)
 </script>
 
 <template>
@@ -13,6 +17,8 @@ useCurrencyProvider()
 
     <main class="app__input-panel">
       <CurrencySwitch />
+
+      <AmountInput v-model:amount="amount" />
     </main>
   </div>
 </template>
@@ -26,7 +32,7 @@ useCurrencyProvider()
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 1rem;
   }
 }
 </style>
