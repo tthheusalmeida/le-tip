@@ -91,7 +91,7 @@ function onKeyDown(e: KeyboardEvent) {
   &__label {
     font-size: 0.875rem;
     font-weight: 500;
-    color: #374151;
+    color: black;
   }
 
   &__wrapper {
@@ -118,7 +118,7 @@ function onKeyDown(e: KeyboardEvent) {
     flex-shrink: 0;
     width: 2rem;
     height: 2rem;
-    color: #6b7280;
+    color: black;
   }
 
   &__field {

@@ -42,7 +42,7 @@ const { amount, tip, people } = useApp()
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
   transition: opacity 0.3s ease;
 }

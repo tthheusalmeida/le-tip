@@ -4,15 +4,19 @@
     <ComputabilityResult title="Gorjeta" :value="amountTip" />
     <ComputabilityResult title="Total" :value="amountTotal" />
     <ComputabilityResult title="por Pessoa" :value="amountPerPerson" />
+    <ComputabilityResult title="em R$" :value="totalInBRL" :loading="loading" isBRL />
   </section>
 </template>
 
 <script setup lang="ts">
+import { computed, watch } from 'vue'
 import { useApp } from '@/composables/useApp'
-import ComputabilityResult from '../molecules/ComputabilityResult.vue'
-import { computed } from 'vue'
+import { useExchangeRate } from '@/composables/useExchangeRate'
+
+import ComputabilityResult from './ComputabilityResult.vue'
 
 const { amount, tip, people } = useApp()
+const { rate, loading, error } = useExchangeRate()
 
 const roundTo = (value: number, decimals = 2) => Math.round(value * 10 ** decimals) / 10 ** decimals
 
@@ -21,6 +25,21 @@ const amountTip = computed(() =>
 )
 const amountTotal = computed(() => roundTo(amount.value + amountTip.value))
 const amountPerPerson = computed(() => roundTo(amountTotal.value / people.value))
+
+watch(
+  () => error,
+  () => {
+    if (error) console.log(error) // TODO emit an error message when it occurs
+  },
+)
+
+const totalInBRL = computed(() => {
+  if (!rate.value) {
+    return 0
+  }
+
+  return roundTo(amount.value * rate.value)
+})
 </script>
 
 <style scoped lang="css">
@@ -30,7 +49,7 @@ const amountPerPerson = computed(() => roundTo(amountTotal.value / people.value)
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
   transition: opacity 0.3s ease;
 }
