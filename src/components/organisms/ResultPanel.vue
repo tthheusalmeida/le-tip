@@ -25,8 +25,7 @@ const amountPerPerson = computed(() => roundTo(amountTotal.value / people.value)
 
 <style scoped lang="css">
 .result-panel {
-  width: 50%;
-  flex-shrink: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,6 +37,7 @@ const amountPerPerson = computed(() => roundTo(amountTotal.value / people.value)
 @media (min-width: 768px) {
   .result-panel {
     width: 100%;
+    height: 100%;
   }
 }
 </style>

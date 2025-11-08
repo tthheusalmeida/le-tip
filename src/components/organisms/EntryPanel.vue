@@ -37,8 +37,7 @@ const { amount, tip, people } = useApp()
 
 <style scoped lang="css">
 .entry-panel {
-  width: 50%;
-  flex-shrink: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,6 +49,7 @@ const { amount, tip, people } = useApp()
 @media (min-width: 768px) {
   .entry-panel {
     width: 100%;
+    height: 100%;
   }
 }
 </style>

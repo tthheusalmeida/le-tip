@@ -70,14 +70,19 @@ handleResize()
 
 @media (min-width: 768px) {
   .app__slides {
-    transform: translateX(0) !important;
     width: 100%;
-  }
-
-  .app__main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    transform: none;
+  }
+
+  .entry-panel,
+  .result-panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 </style>
