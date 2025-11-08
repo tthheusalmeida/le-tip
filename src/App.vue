@@ -56,15 +56,13 @@ handleResize()
   }
 
   &__slides {
-    display: flex;
-    justify-content: space-evenly;
-    width: 200%;
-    gap: 8rem;
+    display: grid;
+    grid-template-columns: 100% 100%;
     transition: transform 0.4s ease-in-out;
     transform: translateX(0);
 
     &--second {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
   }
 }
