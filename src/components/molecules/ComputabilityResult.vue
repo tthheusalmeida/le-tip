@@ -13,6 +13,7 @@ import { computed } from 'vue'
 import { useCurrency } from '@/composables/useCurrency'
 import { CURRENCY } from '@/utils/consts'
 import { BiEuro, BiDollar } from 'vue3-icons/bi'
+import { formatAmount } from '@/utils/formatter'
 
 const props = defineProps<{
   title: string
@@ -22,7 +23,7 @@ const props = defineProps<{
 const { currency } = useCurrency()
 const icon = computed(() => (currency.value === CURRENCY.EUR ? BiEuro : BiDollar))
 
-const formattedValue = computed(() => props.value.toFixed(2))
+const formattedValue = computed(() => formatAmount(props.value.toFixed(2), currency.value))
 </script>
 
 <style scoped lang="css">

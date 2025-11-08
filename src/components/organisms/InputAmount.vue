@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useCurrency } from '@/composables/useCurrency'
-import { CURRENCY, LOCALE_MAP } from '@/utils/consts'
+import { CURRENCY } from '@/utils/consts'
 import { BiEuro, BiDollar } from 'vue3-icons/bi'
+import { formatAmount } from '@/utils/formatter'
 
 const MAX_DIGITS = 11
 
@@ -34,30 +35,7 @@ watch(
 )
 
 const rawValue = ref('0')
-const formattedAmount = computed(() => {
-  const locale = LOCALE_MAP[currency.value]
-  const digits = rawValue.value.replace(/\D/g, '')
-
-  if (!digits) return '0'
-
-  let intPart = digits
-  let decPart = ''
-
-  if (digits.length > 2) {
-    intPart = digits.slice(0, -2)
-    decPart = digits.slice(-2)
-  }
-
-  const number = parseFloat(`${intPart}.${decPart || ''}`)
-
-  const fractionDigits = decPart ? 2 : 0
-
-  return new Intl.NumberFormat(locale, {
-    style: 'decimal',
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
-  }).format(number)
-})
+const formattedAmount = computed(() => formatAmount(rawValue.value, currency.value))
 
 if (!amount.value) {
   amount.value = 0
