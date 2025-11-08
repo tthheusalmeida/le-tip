@@ -50,7 +50,9 @@ const icon = computed(() =>
   props.isBRL ? FaBrazilianRealSign : currency.value === CURRENCY.EUR ? BiEuro : BiDollar,
 )
 
-const formattedValue = computed(() => formatAmount(props.value.toFixed(2), currency.value))
+const formattedValue = computed(() =>
+  formatAmount(props.value.toFixed(2), props.isBRL ? CURRENCY.BRL : currency.value),
+)
 </script>
 
 <style scoped lang="css">
