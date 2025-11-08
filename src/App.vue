@@ -57,8 +57,9 @@ handleResize()
 
   &__slides {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 200%;
+    gap: 8rem;
     transition: transform 0.4s ease-in-out;
     transform: translateX(0);
 
@@ -73,6 +74,7 @@ handleResize()
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    place-items: center;
     gap: 2rem;
     transform: none;
   }

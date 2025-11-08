@@ -6,7 +6,7 @@
     <InputRange
       v-model="tip"
       label="Gorjeta"
-      :min="5"
+      :min="10"
       :max="20"
       :step="1"
       :formatter="formatAsPercentage"
@@ -38,6 +38,7 @@ const { amount, tip, people } = useApp()
 <style scoped lang="css">
 .entry-panel {
   width: 100%;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   align-items: center;
