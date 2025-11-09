@@ -1,6 +1,14 @@
 import { inject, ref, provide } from 'vue'
-import { currencyKey } from '@/di/keys'
-import { CURRENCY, type Currency } from '@/utils/consts'
+import type { Ref, InjectionKey } from 'vue'
+import { CURRENCY } from '@/utils/consts'
+import type { Currency } from '@/utils/consts'
+
+export interface CurrencyContext {
+  currency: Ref<Currency>
+  toggleCurrency: () => void
+}
+
+export const currencyKey: InjectionKey<CurrencyContext> = Symbol('currency')
 
 export function useCurrency() {
   const context = inject(currencyKey)

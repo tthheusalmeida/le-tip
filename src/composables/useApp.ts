@@ -1,5 +1,13 @@
 import { inject, ref, provide } from 'vue'
-import { appKey } from '@/di/keys'
+import type { Ref, InjectionKey } from 'vue'
+
+export interface AppContext {
+  amount: Ref<number>
+  tip: Ref<number>
+  people: Ref<number>
+}
+
+export const appKey: InjectionKey<AppContext> = Symbol('app')
 
 export function useApp() {
   const context = inject(appKey)
