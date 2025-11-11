@@ -3,7 +3,6 @@ import { ref, watch } from 'vue'
 import { CURRENCY } from '@/utils/consts'
 import { useApp } from './useApp'
 import { useCurrency } from './useCurrency'
-import { useFetch } from '@vueuse/core'
 
 export interface ExchangeResponse {
   code: string
