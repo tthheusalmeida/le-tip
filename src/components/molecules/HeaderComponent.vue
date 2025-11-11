@@ -2,7 +2,7 @@
 
 <template>
   <header class="header header--dark">
-    <h3 class="header__title">Lip Tip</h3>
+    <h3 class="header__title">Le/Tip</h3>
     <div class="header__theme">Tema</div>
   </header>
 </template>
