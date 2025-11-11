@@ -1,8 +1,21 @@
-import { ref, watchEffect } from 'vue'
-import { fetchExchangeRate } from '@/services/exchangeService'
+import { ref, watch } from 'vue'
+
 import { CURRENCY } from '@/utils/consts'
 import { useApp } from './useApp'
 import { useCurrency } from './useCurrency'
+import { useFetch } from '@vueuse/core'
+
+export interface ExchangeResponse {
+  code: string
+  codein: string
+  name: string
+  bid: string
+  ask: string
+  create_date: string
+}
+
+const API_URL = 'https://economia.awesomeapi.com.br/json/last'
+const API_KEY = import.meta.env.VITE_AWEASOME_API_KEY
 
 export function useExchangeRate() {
   const { amount } = useApp()
@@ -27,9 +40,31 @@ export function useExchangeRate() {
     }
   }
 
-  watchEffect(() => {
-    loadRate()
-  })
+  async function fetchExchangeRate(currentCurrency: string, requestedCurrency: string) {
+    const pair = `${currentCurrency}-${requestedCurrency}`
+    const url = `${API_URL}/${pair}`
+
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    })
+
+    if (!res.ok) throw new Error('Erro ao buscar cotação')
+
+    const data = await res.json()
+    const result: ExchangeResponse = data[`${currentCurrency}BRL`]
+
+    return parseFloat(result.bid)
+  }
+
+  watch(
+    [currency, amount],
+    () => {
+      loadRate()
+    },
+    { immediate: true },
+  )
 
   return { rate, loading, error, reload: loadRate }
 }

@@ -42,7 +42,8 @@ describe('InputAmount.vue', () => {
       props: { amount: 0 },
     })
 
-    expect(wrapper.find('.input-money__icon').exists()).toBe(true)
+    const input = wrapper.find('input')
+    expect(input.element.value).toBe('$0.00')
   })
 
   it('when typing digits, should emit update:amount with correct value', async () => {
