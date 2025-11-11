@@ -24,14 +24,16 @@ function toggleRotation() {
   position: fixed;
   right: 1.25rem;
   bottom: 1.25rem;
+  width: 4rem;
+  height: 4rem;
   transition:
     transform 0.12s ease,
     box-shadow 0.12s ease;
 
   &__icon {
     flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     color: white;
     transition: transform 0.3s ease;
   }

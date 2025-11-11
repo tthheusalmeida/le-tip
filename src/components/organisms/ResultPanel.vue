@@ -44,7 +44,8 @@ const totalInBRL = computed(() => {
 
 <style scoped lang="css">
 .result-panel {
-  width: 100%;
+  padding-right: 1rem;
+  margin-right: 0.1rem;
   max-width: 460px;
   display: flex;
   flex-direction: column;

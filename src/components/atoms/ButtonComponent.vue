@@ -54,11 +54,11 @@ const themeClass = computed(() => {
   }
 
   &--eur {
-    --bg-color: #0055cc;
+    --bg-color: var(--eur-bg-color);
   }
 
   &--usd {
-    --bg-color: #dc143c;
+    --bg-color: var(--usd-bg-color);
   }
 
   background-color: var(--bg-color, #3498db);

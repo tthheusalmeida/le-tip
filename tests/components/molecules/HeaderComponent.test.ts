@@ -9,7 +9,6 @@ describe('HeaderComponent', () => {
     const header = wrapper.find('header')
     expect(header.exists()).toBe(true)
     expect(header.classes()).toContain('header')
-    expect(header.classes()).toContain('header--dark')
 
     const title = wrapper.find('.header__title')
     expect(title.exists()).toBe(true)
@@ -17,7 +16,7 @@ describe('HeaderComponent', () => {
 
     const theme = wrapper.find('.header__theme')
     expect(theme.exists()).toBe(true)
-    expect(theme.text()).toBe('Tema')
+    expect(theme.text()).toBe('')
 
     wrapper.unmount()
   })

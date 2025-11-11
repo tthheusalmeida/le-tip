@@ -1,23 +1,29 @@
 <template>
   <div class="computability-result">
-    <span class="computability-result__title">{{ title }}</span>
-    <div class="computability-result__result">
-      <component
-        v-if="icon"
-        :is="icon"
-        class="computability-result__icon"
-        :class="{ 'computability-result__icon--is-brl': props.isBRL }"
-      />
+    <div class="computability-result__wrapper" :class="backgroundTheme">
+      <span class="computability-result__title">{{ title }}</span>
+      <div class="computability-result__result">
+        <Transition name="fade" mode="out-in">
+          <component
+            v-if="icon"
+            :is="icon"
+            class="computability-result__icon"
+            :class="{ 'computability-result__icon--is-brl': props.isBRL }"
+        /></Transition>
 
-      <template v-if="loading">
-        <component
-          :is="AiOutlineLoading"
-          class="computability-result__icon computability-result__icon--loading"
-        />
-      </template>
-      <template v-else>
-        <span class="computability-result__value">{{ formattedValue }}</span>
-      </template>
+        <Transition name="fade" mode="out-in">
+          <template v-if="loading">
+            <component
+              :is="AiOutlineLoading"
+              class="computability-result__icon computability-result__icon--loading"
+              :key="'loading'"
+            />
+          </template>
+          <template v-else>
+            <span class="computability-result__value" :key="'value'">{{ formattedValue }}</span>
+          </template>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
@@ -46,8 +52,14 @@ const props = withDefaults(defineProps<ComputabilityResultProps>(), {
 })
 
 const { currency } = useCurrency()
+
+const isEURCurrency = computed(() => currency.value === CURRENCY.EUR)
+
 const icon = computed(() =>
-  props.isBRL ? FaBrazilianRealSign : currency.value === CURRENCY.EUR ? BiEuro : BiDollar,
+  props.isBRL ? FaBrazilianRealSign : isEURCurrency.value ? BiEuro : BiDollar,
+)
+const backgroundTheme = computed(() =>
+  isEURCurrency.value ? 'computability-result__wrapper--eur' : 'computability-result__wrapper--usd',
 )
 
 const formattedValue = computed(() =>
@@ -57,26 +69,49 @@ const formattedValue = computed(() =>
 
 <style scoped lang="css">
 .computability-result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  width: 100%;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+
+    background: var(--bg-color-opacity);
+
+    &--eur {
+      background: var(--eur-bg-color);
+    }
+
+    &--usd {
+      background: var(--usd-bg-color);
+    }
+  }
 
   &__title {
-    font-size: x-large;
+    font-size: medium;
+    text-align: left;
+    color: white;
+    width: 100%;
   }
 
   &__result {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 2rem;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0 0.5rem;
+    color: white;
   }
 
   &__icon {
     flex-shrink: 0;
+    min-height: 2rem;
     width: 2rem;
     height: 2rem;
 

@@ -64,7 +64,10 @@ function onKeyDown(e: KeyboardEvent) {
 <template>
   <div class="input-money">
     <span class="input-money__label">Valor</span>
-    <component v-if="icon" :is="icon" class="input-money__icon" />
+    <Transition name="fade" mode="out-in">
+      <component v-if="icon" :is="icon" class="input-money__icon" />
+    </Transition>
+
     <div class="input-money__wrapper">
       <input
         ref="inputRef"
@@ -84,14 +87,13 @@ function onKeyDown(e: KeyboardEvent) {
 .input-money {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
   gap: 0.5rem;
 
   &__label {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: black;
+    font-size: 1.2em;
+    font-weight: 600;
   }
 
   &__wrapper {
@@ -118,7 +120,6 @@ function onKeyDown(e: KeyboardEvent) {
     flex-shrink: 0;
     width: 2rem;
     height: 2rem;
-    color: black;
   }
 
   &__field {
@@ -130,6 +131,7 @@ function onKeyDown(e: KeyboardEvent) {
     color: #111827;
     background-color: transparent;
     text-align: right;
+    max-width: fit-content;
   }
 
   &__field::placeholder {

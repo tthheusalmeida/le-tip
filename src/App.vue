@@ -29,7 +29,7 @@ handleResize()
 
 <template>
   <div class="app">
-    <HeaderComponent />
+    <HeaderComponent class="app__header" />
 
     <main class="app__main">
       <div class="app__slides" :class="{ 'app__slides--second': isSecondTab && !isDesktop }">
@@ -45,8 +45,17 @@ handleResize()
 
 <style scoped lang="css">
 .app {
-  padding: 1rem;
+  padding: 0 1rem;
   overflow: hidden;
+
+  height: 100dvh;
+  background-color: var(--bg-color);
+  transition: all 300s ease-in-out;
+  color: var(--fg-color);
+
+  &__header {
+    margin-bottom: 1rem;
+  }
 
   &__main {
     position: relative;
@@ -58,7 +67,7 @@ handleResize()
   &__slides {
     display: grid;
     grid-template-columns: 100% 100%;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 300ms ease-in-out;
     transform: translateX(0);
 
     &--second {

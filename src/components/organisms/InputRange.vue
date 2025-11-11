@@ -105,11 +105,11 @@ const inputStyle = computed(() => {
   --range-color: #3498db;
 
   &--eur {
-    --range-color: #0055cc;
+    --range-color: var(--eur-bg-color);
   }
 
   &--usd {
-    --range-color: #dc143c;
+    --range-color: var(--usd-bg-color);
   }
 
   &__header {
@@ -123,7 +123,6 @@ const inputStyle = computed(() => {
   &__label {
     margin-right: 8px;
     font-weight: 600;
-    color: #333;
   }
 
   &__current-value {

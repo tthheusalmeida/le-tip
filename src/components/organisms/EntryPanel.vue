@@ -39,7 +39,8 @@ const { amount, tip, people } = useApp()
 
 <style scoped lang="css">
 .entry-panel {
-  width: 100%;
+  padding-left: 0 1rem;
+  margin-left: 0.1rem;
   max-width: 460px;
   display: flex;
   flex-direction: column;
@@ -47,6 +48,7 @@ const { amount, tip, people } = useApp()
   justify-content: flex-start;
   gap: 1rem;
   transition: opacity 0.3s ease;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {

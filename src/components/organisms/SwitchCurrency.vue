@@ -76,11 +76,11 @@ const { currency, toggleCurrency } = useCurrency()
   animation: slideIn 0.3s ease;
 
   &--eur {
-    color: #ffd700;
+    color: var(--eur-symbol-color);
   }
 
   &--usd {
-    color: #1e3a8a;
+    color: var(--usd-symbol-color);
   }
 }
 
