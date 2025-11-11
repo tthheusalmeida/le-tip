@@ -1,8 +1,8 @@
 <template>
   <section class="entry-panel">
-    <SwitchCurrency />
+    <SwitchCurrency data-testid="switch-currency" />
 
-    <InputAmount v-model:amount="amount" />
+    <InputAmount v-model:amount="amount" data-testid="input-amount" />
     <InputRange
       v-model="tip"
       label="Gorjeta"
@@ -10,6 +10,7 @@
       :max="20"
       :step="1"
       :formatter="formatAsPercentage"
+      data-testid="tip-input-range"
     />
     <InputRange
       v-model="people"
@@ -18,6 +19,7 @@
       :max="16"
       :step="1"
       :formatter="formatAsNumber"
+      data-testid="people-input-range"
     />
   </section>
 </template>
