@@ -4,9 +4,6 @@
   --eur-bg-color: #0055cc;
   --usd-bg-color: #dc143c;
 
-  --eur-bg-color-pastel: #497fcaff;
-  --usd-bg-color-pastel: #d64461ff;
-
   --eur-symbol-color: #aa9a42ff;
   --usd-symbol-color: #1e3a8a;
 
@@ -37,7 +34,7 @@ body,
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 300ms ease;
+  transition: all 300ms ease;
 }
 
 .fade-enter-from,

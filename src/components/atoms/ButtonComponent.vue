@@ -1,12 +1,3 @@
-<template>
-  <button
-    class="button-component"
-    :class="[{ 'button-component--rounded-full': rounded }, themeClass]"
-  >
-    <slot />
-  </button>
-</template>
-
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useCurrency } from '@/composables/useCurrency'
@@ -33,6 +24,15 @@ const themeClass = computed(() => {
   return ''
 })
 </script>
+
+<template>
+  <button
+    class="button-component"
+    :class="[{ 'button-component--rounded-full': rounded }, themeClass]"
+  >
+    <slot />
+  </button>
+</template>
 
 <style scoped lang="css">
 .button-component {

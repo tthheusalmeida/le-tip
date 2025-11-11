@@ -1,34 +1,3 @@
-<template>
-  <div class="range-slider" :class="themeClass">
-    <div class="range-slider__header">
-      <label :for="id" class="range-slider__label">{{ props.label }}:</label>
-
-      <span class="range-slider__current-value">
-        {{ formattedValue }}
-      </span>
-    </div>
-
-    <div class="range-slider__input-wrapper">
-      <input
-        :id="id"
-        type="range"
-        :min="props.min"
-        :max="props.max"
-        :step="props.step"
-        :value="props.modelValue"
-        @input="onInput"
-        class="range-slider__input"
-        :style="inputStyle"
-      />
-    </div>
-
-    <div class="range-slider__limits">
-      <span class="range-slider__limit">{{ props.min }}</span>
-      <span class="range-slider__limit">{{ props.max }}</span>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed } from 'vue'
 import { CURRENCY } from '@/utils/consts'
@@ -96,6 +65,37 @@ const inputStyle = computed(() => {
   }
 })
 </script>
+
+<template>
+  <div class="range-slider" :class="themeClass">
+    <div class="range-slider__header">
+      <label :for="id" class="range-slider__label">{{ props.label }}:</label>
+
+      <span class="range-slider__current-value">
+        {{ formattedValue }}
+      </span>
+    </div>
+
+    <div class="range-slider__input-wrapper">
+      <input
+        :id="id"
+        type="range"
+        :min="props.min"
+        :max="props.max"
+        :step="props.step"
+        :value="props.modelValue"
+        @input="onInput"
+        class="range-slider__input"
+        :style="inputStyle"
+      />
+    </div>
+
+    <div class="range-slider__limits">
+      <span class="range-slider__limit">{{ props.min }}</span>
+      <span class="range-slider__limit">{{ props.max }}</span>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="css">
 .range-slider {

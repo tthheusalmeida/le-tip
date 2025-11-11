@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useCurrency } from '@/composables/useCurrency'
-import { CURRENCY } from '@/utils/consts'
-import { BiEuro, BiDollar } from 'vue3-icons/bi'
 import { formatAmount } from '@/utils/formatter'
+import IconTheme from './IconTheme.vue'
 
 const MAX_DIGITS = 11
 
@@ -21,8 +20,6 @@ defineProps({
 
 const inputRef = ref<HTMLInputElement | null>(null)
 const { currency } = useCurrency()
-
-const icon = computed(() => (currency.value === CURRENCY.EUR ? BiEuro : BiDollar))
 
 watch(
   () => amount.value,
@@ -64,22 +61,18 @@ function onKeyDown(e: KeyboardEvent) {
 <template>
   <div class="input-money">
     <span class="input-money__label">Valor</span>
-    <Transition name="fade" mode="out-in">
-      <component v-if="icon" :is="icon" class="input-money__icon" />
-    </Transition>
+    <IconTheme :current-currency="currency" />
 
-    <div class="input-money__wrapper">
-      <input
-        ref="inputRef"
-        type="text"
-        inputmode="numeric"
-        class="input-money__field"
-        :value="formattedAmount"
-        @input="onInput"
-        @keydown="onKeyDown"
-        @paste.prevent
-      />
-    </div>
+    <input
+      ref="inputRef"
+      type="text"
+      inputmode="numeric"
+      class="input-money__field"
+      :value="formattedAmount"
+      @input="onInput"
+      @keydown="onKeyDown"
+      @paste.prevent
+    />
   </div>
 </template>
 
@@ -87,8 +80,7 @@ function onKeyDown(e: KeyboardEvent) {
 .input-money {
   display: flex;
   align-items: center;
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
   gap: 0.5rem;
 
   &__label {
@@ -96,46 +88,35 @@ function onKeyDown(e: KeyboardEvent) {
     font-weight: 600;
   }
 
-  &__wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.75rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    background-color: #ffffff;
-    transition:
-      border-color 0.2s,
-      outline 0.2s;
-  }
-
-  &__wrapper:focus-within {
-    border-color: #3b82f6;
-    outline: 2px solid #3b82f633;
-  }
-
-  &__icon {
+  &__wrapper &__icon {
     flex-shrink: 0;
     width: 2rem;
     height: 2rem;
   }
 
   &__field {
-    flex: 1;
-    min-width: 0;
+    color: black;
+    font-size: larger;
+    font-weight: 600;
+    text-align: right;
+    padding: 0.75rem;
+    min-height: 3rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+
     border: none;
     outline: none;
-    font-size: 1rem;
-    color: #111827;
-    background-color: transparent;
-    text-align: right;
-    max-width: fit-content;
+    border-radius: 0.5rem;
+
+    transition:
+      border-color 0.2s,
+      outline 0.2s;
   }
 
-  &__field::placeholder {
-    color: #9ca3af;
+  &__field:focus-within {
+    border-color: #3b82f6;
+    outline: 2px solid #3b82f633;
   }
 }
 </style>

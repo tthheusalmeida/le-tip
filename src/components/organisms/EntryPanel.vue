@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { useApp } from '@/composables/useApp'
+
+import SwitchCurrency from './SwitchCurrency.vue'
+import InputAmount from './InputAmount.vue'
+import InputRange from './InputRange.vue'
+
+const formatAsPercentage = (value: number) => `${value}%`
+const formatAsNumber = (value: number) => String(Math.floor(value))
+
+const { amount, tip, people } = useApp()
+</script>
+
 <template>
   <section class="entry-panel">
     <SwitchCurrency data-testid="switch-currency" />
@@ -23,19 +36,6 @@
     />
   </section>
 </template>
-
-<script setup lang="ts">
-import { useApp } from '@/composables/useApp'
-
-import SwitchCurrency from './SwitchCurrency.vue'
-import InputAmount from './InputAmount.vue'
-import InputRange from './InputRange.vue'
-
-const formatAsPercentage = (value: number) => `${value}%`
-const formatAsNumber = (value: number) => String(Math.floor(value))
-
-const { amount, tip, people } = useApp()
-</script>
 
 <style scoped lang="css">
 .entry-panel {

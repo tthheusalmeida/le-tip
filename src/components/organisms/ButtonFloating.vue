@@ -1,12 +1,3 @@
-<template>
-  <ButtonComponent class="floating-button" rounded @click="toggleRotation">
-    <BiChevronRight
-      class="floating-button__icon"
-      :class="{ 'floating-button__icon--rotated': rotated }"
-    />
-  </ButtonComponent>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import ButtonComponent from '../atoms/ButtonComponent.vue'
@@ -18,6 +9,15 @@ function toggleRotation() {
   rotated.value = !rotated.value
 }
 </script>
+
+<template>
+  <ButtonComponent class="floating-button" rounded @click="toggleRotation">
+    <BiChevronRight
+      class="floating-button__icon"
+      :class="{ 'floating-button__icon--rotated': rotated }"
+    />
+  </ButtonComponent>
+</template>
 
 <style scoped lang="css">
 .floating-button {

@@ -1,13 +1,3 @@
-<template>
-  <section class="result-panel">
-    <ComputabilityResult title="Conta" :value="amount" />
-    <ComputabilityResult title="Gorjeta" :value="amountTip" />
-    <ComputabilityResult title="Total" :value="amountTotal" />
-    <ComputabilityResult title="por Pessoa" :value="amountPerPerson" />
-    <ComputabilityResult title="em R$" :value="totalInBRL" :loading="loading" isBRL />
-  </section>
-</template>
-
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import { useApp } from '@/composables/useApp'
@@ -41,6 +31,16 @@ const totalInBRL = computed(() => {
   return roundTo(amount.value * rate.value)
 })
 </script>
+
+<template>
+  <section class="result-panel">
+    <ComputabilityResult title="Conta" :value="amount" />
+    <ComputabilityResult title="Gorjeta" :value="amountTip" />
+    <ComputabilityResult title="Total" :value="amountTotal" />
+    <ComputabilityResult title="por Pessoa" :value="amountPerPerson" />
+    <ComputabilityResult title="em R$" :value="totalInBRL" :loading="loading" isBRL />
+  </section>
+</template>
 
 <style scoped lang="css">
 .result-panel {
