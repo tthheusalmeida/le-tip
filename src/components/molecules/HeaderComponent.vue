@@ -12,7 +12,7 @@ const { theme, toggleTheme } = useTheme()
     <button @click="toggleTheme" class="header__theme">
       <Transition name="fade" mode="out-in">
         <FaMoon class="header__theme--moon" v-if="theme === 'light'" />
-        <FaSun class="header__theme--moon" v-else />
+        <FaSun class="header__theme--sun" v-else />
       </Transition>
     </button>
   </header>

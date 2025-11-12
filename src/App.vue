@@ -39,7 +39,12 @@ handleResize()
       </div>
     </main>
 
-    <ButtonFloating v-if="!isDesktop" :rotated="isSecondTab" @click="toggleTab" />
+    <ButtonFloating
+      v-if="!isDesktop"
+      data-testeid="floating-button"
+      :rotated="isSecondTab"
+      @click="toggleTab"
+    />
   </div>
 </template>
 
