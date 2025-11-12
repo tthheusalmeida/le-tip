@@ -103,7 +103,7 @@ function onKeyDown(e: KeyboardEvent) {
     min-height: 3rem;
     width: 100%;
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: var(--input-bg-color);
 
     border: none;
     outline: none;
@@ -112,11 +112,6 @@ function onKeyDown(e: KeyboardEvent) {
     transition:
       border-color 0.2s,
       outline 0.2s;
-  }
-
-  &__field:focus-within {
-    border-color: #3b82f6;
-    outline: 2px solid #3b82f633;
   }
 }
 </style>

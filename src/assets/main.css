@@ -12,6 +12,8 @@
 
   --bg-color-opacity: #494949;
   --fg-color-opacity: #dddddd;
+
+  --input-bg-color: #d1d1d1;
 }
 
 :root[data-theme='dark'] {
