@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { CURRENCY } from '@/utils/consts'
 import { useApp } from './useApp'
 import { useCurrency } from './useCurrency'
+import { useSnackbar } from 'vue3-snackbar'
 
 export interface ExchangeResponse {
   code: string
@@ -19,6 +20,7 @@ const API_KEY = import.meta.env.VITE_AWEASOME_API_KEY
 export function useExchangeRate() {
   const { amount } = useApp()
   const { currency } = useCurrency()
+  const snackbar = useSnackbar()
 
   const rate = ref<number | null>(null)
   const loading = ref(false)
@@ -34,6 +36,13 @@ export function useExchangeRate() {
       rate.value = value
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : String(err)
+
+      snackbar.add({
+        type: 'error',
+        text: error.value,
+      })
+
+      rate.value = 0
     } finally {
       loading.value = false
     }

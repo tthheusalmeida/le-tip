@@ -45,6 +45,8 @@ handleResize()
       :rotated="isSecondTab"
       @click="toggleTab"
     />
+
+    <vue3-snackbar bottom left :duration="1000000"></vue3-snackbar>
   </div>
 </template>
 

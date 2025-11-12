@@ -216,6 +216,46 @@ describe('E2E: Desktop', () => {
       })
     })
   })
+
+  describe('Error handling when trying to get USD rate (USD)', () => {
+    const MOCK_USD_RATE_RESPONSE = {
+      USDBRL: {
+        code: 'USD',
+        codein: 'BRL',
+        name: 'Dólar/Real Brasileiro',
+        bid: '5.2000',
+        ask: '5.2000',
+        create_date: '2025-01-01 10:00:00',
+      },
+    }
+
+    beforeEach(() => {
+      cy.viewport('macbook-16')
+      cy.visit('/')
+
+      cy.intercept('GET', 'https://economia.awesomeapi.com.br/json/last/USD-BRL', (req) => {
+        req.reply({
+          statusCode: 500,
+          body: MOCK_USD_RATE_RESPONSE,
+        })
+      }).as('getUsdRate')
+    })
+
+    it('should show error message when API request for USD rate fails', () => {
+      const amountInputFieldSelector = '[data-testid="input-amount"] input.input-money__field'
+
+      cy.get('[data-testid="switch-currency"]').click()
+
+      cy.get(amountInputFieldSelector).clear()
+      cy.get(amountInputFieldSelector).type('73.23')
+
+      cy.wait('@getUsdRate')
+
+      cy.get('.vue3-snackbar-message-content')
+        .should('be.visible')
+        .and('contain.text', 'Erro ao buscar cotação')
+    })
+  })
 })
 
 describe('E2E: Mobile', () => {
