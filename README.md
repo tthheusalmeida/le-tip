@@ -1,5 +1,10 @@
 <h3 align="center">
-  <img alt="Le/Tip" width="70%" title="#logo" src="https://github.com/tthheusalmeida/le-tip/blob/main/public/cover/app-preview.gif">
+  <img 
+    src="https://raw.githubusercontent.com/tthheusalmeida/le-tip/main/public/cover/app-preview.gif" 
+    alt="Le/Tip app preview" 
+    title="Le/Tip" 
+    style="width: 600px; max-width: 100%; border-radius: 12px;" 
+  />
   <br>
 </h3>
 
