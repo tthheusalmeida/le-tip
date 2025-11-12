@@ -1,70 +1,133 @@
-# le-tip
+<h3 align="center">
+  <img alt="Le/Tip" width="70%" title="#logo" src="https://github.com/tthheusalmeida/le-tip/blob/main/public/cover/app-preview.gif">
+  <br>
+</h3>
 
-This template should help get you started developing with Vue 3 in Vite.
+<p align="center">
+  <strong>Le/Tip</strong> — A responsive and elegant tip calculator built with Vue 3, designed for smooth currency conversion and delightful UX.
+</p>
 
-## Recommended IDE Setup
+<p align="center">
+  <a href="https://github.com/tthheusalmeida/le-tip/blob/main/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" target="_blank" />
+  </a>
+</p>
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+# 📂 Table of Contents
 
-## Recommended Browser Setup
+- [About](#about)
+- [Technology Stack](#technology-stack)
+- [Features](#features)
+- [Testing](#testing)
+- [Setup & Commands](#setup--commands)
+- [License](#license)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+<a id="about"></a>
 
-## Type Support for `.vue` Imports in TS
+## 👤 About
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+**Le/Tip** is a single-page application (SPA) built with **Vue.js 3** for calculating and splitting tips easily.  
+You can input the total bill, tip percentage, and number of people sharing the bill — the app instantly calculates each person’s share.
 
-## Customize configuration
+The total can be entered in **USD (Dollar)** or **EUR (Euro)**, and the app automatically fetches the **current exchange rate to BRL (R$)** using the [AwesomeAPI](https://docs.awesomeapi.com.br/api-de-moedas) through a REST call.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+<a id="technology-stack"></a>
 
-## Project Setup
+## 💻 Technology Stack
 
-```sh
-npm install
-```
+This project was developed with the following technologies and tools:
 
-### Compile and Hot-Reload for Development
+### 🧠 Core
 
-```sh
-npm run dev
-```
+- [Vue 3](https://vuejs.org/) — Progressive framework for building user interfaces
+- [Vite](https://vitejs.dev/) — Fast build tool and development server
+- [TypeScript](https://www.typescriptlang.org/) — Type-safe JavaScript for scalable apps
 
-### Type-Check, Compile and Minify for Production
+### 🧩 UI & UX
 
-```sh
-npm run build
-```
+- [vue3-icons](https://www.npmjs.com/package/vue3-icons) — Icon components for Vue 3
+- [vue3-snackbar](https://www.npmjs.com/package/vue3-snackbar) — Snackbar notifications for a polished user experience
+- [@vueuse/core](https://vueuse.org/) — Collection of essential Vue Composition utilities
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 🧪 Testing & Quality
 
-```sh
+- [Vitest](https://vitest.dev/) — Fast unit and integration testing
+- [Cypress](https://www.cypress.io/) — End-to-end testing for full user flows
+- [@vue/test-utils](https://test-utils.vuejs.org/) — Vue component testing utilities
+- [ESLint](https://eslint.org/) — Linting and static code analysis
+- [Prettier](https://prettier.io/) — Code formatter for consistent style
+
+### 🛠️ Development & Tooling
+
+- [vite-plugin-vue-devtools](https://github.com/vuejs/devtools-next) — Vue DevTools integration for debugging
+- [npm-run-all2](https://github.com/mysticatea/npm-run-all) — Efficiently run multiple npm scripts in parallel or sequence
+- [postcss-nested](https://github.com/postcss/postcss-nested) — CSS nesting for cleaner styles
+- [jiti](https://github.com/unjs/jiti) — Runtime TypeScript loader used internally by Vite
+
+<a id="features"></a>
+
+## ✨ Features
+
+- 💰 **Tip Calculator:** Enter bill total, desired tip, and number of people to split the total instantly.
+- 🌍 **Currency Conversion:** Supports USD and EUR, automatically converted to BRL using live data from AwesomeAPI.
+- 🌓 **Light & Dark Mode:** Switch themes seamlessly for better accessibility and comfort.
+- 🎨 **Smooth Transitions:** Subtle animations enhance user experience during currency or theme changes.
+- 🔄 **Loading States:** Displays animated loading indicators during API requests.
+- 📱 **Responsive Design:** Optimized for both desktop and mobile screens.
+
+<a id="testing"></a>
+
+## 🧪 Testing
+
+Le/Tip is fully tested to ensure robustness and reliability:
+
+- **Unit Tests:** Validate individual components and utilities using **Vitest**.
+- **Integration Tests:** Confirm module interactions using **Vitest + Vue Test Utils**.
+- **End-to-End Tests:** Simulate complete user interactions with **Cypress**.
+
+Run all tests locally:
+
+```bash
 npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
 npm run test:e2e:dev
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+<a id="setup--commands"></a>
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+## ⚙️ Setup & Commands
 
-```sh
-npm run build
-npm run test:e2e
+### Install dependencies
+
+```bash
+npm install
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Start development server
 
-```sh
+```bash
+npm run dev
+```
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Lint codebase
+
+```bash
 npm run lint
 ```
+
+<a id="license"></a>
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [license page](https://opensource.org/licenses/MIT) for more information.
+
+---
+
+<h4 align="center">
+  Made with ❤️ by <a href="https://www.linkedin.com/in/dev-almeida-matheus/" target="_blank">Matheus Almeida</a>
+</h4>
