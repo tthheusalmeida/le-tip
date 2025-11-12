@@ -1,12 +1,12 @@
 describe('E2E: Desktop', () => {
-  describe('Validação da troca de Tema', () => {
+  describe('Validation of the theme change', () => {
     beforeEach(() => {
       cy.viewport('macbook-16')
 
       cy.visit('/')
     })
 
-    it(`Deve mudar o tema de Light para Dark`, () => {
+    it(`Should change the theme from Light to Dark.`, () => {
       cy.get('header').should('be.visible')
 
       cy.get('.header__theme').click()
@@ -14,7 +14,7 @@ describe('E2E: Desktop', () => {
       cy.get('.header__theme--moon').should('exist')
     })
 
-    it(`Deve mudar o tema de Light para Dark, Dark para Light`, () => {
+    it(`Should change the theme from Light to Dark, from Dark to Light`, () => {
       cy.get('header').should('be.visible')
 
       cy.get('.header__theme').click()
@@ -25,7 +25,7 @@ describe('E2E: Desktop', () => {
     })
   })
 
-  describe('Interação Completa e Verificação de Resultados (EUR)', () => {
+  describe('Full Interaction and Results Verification (EUR)', () => {
     const MOCK_EUR_RATE_RESPONSE = {
       EURBRL: {
         code: 'EUR',
@@ -39,36 +39,36 @@ describe('E2E: Desktop', () => {
 
     const testCases = [
       {
-        conta: '73,23',
-        gorjeta: 13,
-        pessoas: 10,
-        gorjetacalculada: '9,52',
+        amount: '73,23',
+        tip: 13,
+        people: 10,
+        computedTip: '9,52',
         total: '82,75',
-        porPessoa: '8,28',
+        perPerson: '8,28',
       },
       {
-        conta: '60,00',
-        gorjeta: 10,
-        pessoas: 3,
-        gorjetacalculada: '6,00',
+        amount: '60,00',
+        tip: 10,
+        people: 3,
+        computedTip: '6,00',
         total: '66,00',
-        porPessoa: '22,00',
+        perPerson: '22,00',
       },
       {
-        conta: '13,00',
-        gorjeta: 15,
-        pessoas: 2,
-        gorjetacalculada: '1,95',
+        amount: '13,00',
+        tip: 15,
+        people: 2,
+        computedTip: '1,95',
         total: '14,95',
-        porPessoa: '7,48',
+        perPerson: '7,48',
       },
       {
-        conta: '2,58',
-        gorjeta: 17,
-        pessoas: 3,
-        gorjetacalculada: '0,44',
+        amount: '2,58',
+        tip: 17,
+        people: 3,
+        computedTip: '0,44',
         total: '3,02',
-        porPessoa: '1,01',
+        perPerson: '1,01',
       },
     ]
 
@@ -85,21 +85,21 @@ describe('E2E: Desktop', () => {
       }).as('getEurRate')
     })
 
-    testCases.forEach(({ conta, gorjeta, pessoas, gorjetacalculada, total, porPessoa }) => {
-      it(`deve calcular corretamente para conta=${conta}, gorjeta=${gorjeta}% e pessoas=${pessoas}`, () => {
+    testCases.forEach(({ amount, tip, people, computedTip, total, perPerson }) => {
+      it(`Should calculate correctly to amount=${amount}, tip=${tip}% and people=${people}`, () => {
         cy.get('header').should('be.visible')
 
         const amountInputFieldSelector = '[data-testid="input-amount"] input.input-money__field'
 
         cy.get(amountInputFieldSelector).clear()
-        cy.get(amountInputFieldSelector).type(conta)
+        cy.get(amountInputFieldSelector).type(amount)
 
         cy.get('[data-testid="tip-input-range"] input[type="range"]')
-          .invoke('val', gorjeta)
+          .invoke('val', tip)
           .trigger('input')
 
         cy.get('[data-testid="people-input-range"] input[type="range"]')
-          .invoke('val', pessoas)
+          .invoke('val', people)
           .trigger('input')
 
         cy.wait('@getEurRate')
@@ -108,10 +108,10 @@ describe('E2E: Desktop', () => {
 
         const resultAmount = '.computability-result .computability-result__result'
 
-        cy.get(resultAmount).eq(0).should('contain.text', conta.replace('.', ','))
-        cy.get(resultAmount).eq(1).should('contain.text', gorjetacalculada)
+        cy.get(resultAmount).eq(0).should('contain.text', amount.replace('.', ','))
+        cy.get(resultAmount).eq(1).should('contain.text', computedTip)
         cy.get(resultAmount).eq(2).should('contain.text', total)
-        cy.get(resultAmount).eq(3).should('contain.text', porPessoa)
+        cy.get(resultAmount).eq(3).should('contain.text', perPerson)
         cy.get('[data-testid="result-in-brl"] .computability-result__icon--loading').should(
           'not.exist',
         )
@@ -119,7 +119,7 @@ describe('E2E: Desktop', () => {
     })
   })
 
-  describe('Interação Completa e Verificação de Resultados (USD)', () => {
+  describe('Full Interaction and Results Verification (USD)', () => {
     const MOCK_USD_RATE_RESPONSE = {
       USDBRL: {
         code: 'USD',
@@ -133,36 +133,36 @@ describe('E2E: Desktop', () => {
 
     const testCases = [
       {
-        conta: '73.23',
-        gorjeta: 13,
-        pessoas: 10,
-        gorjetacalculada: '9.52',
+        amount: '73.23',
+        tip: 13,
+        people: 10,
+        computedTip: '9.52',
         total: '82.75',
-        porPessoa: '8.28',
+        perPerson: '8.28',
       },
       {
-        conta: '60.00',
-        gorjeta: 10,
-        pessoas: 3,
-        gorjetacalculada: '6.00',
+        amount: '60.00',
+        tip: 10,
+        people: 3,
+        computedTip: '6.00',
         total: '66.00',
-        porPessoa: '22.00',
+        perPerson: '22.00',
       },
       {
-        conta: '13.00',
-        gorjeta: 15,
-        pessoas: 2,
-        gorjetacalculada: '1.95',
+        amount: '13.00',
+        tip: 15,
+        people: 2,
+        computedTip: '1.95',
         total: '14.95',
-        porPessoa: '7.48',
+        perPerson: '7.48',
       },
       {
-        conta: '2.58',
-        gorjeta: 17,
-        pessoas: 3,
-        gorjetacalculada: '0.44',
+        amount: '2.58',
+        tip: 17,
+        people: 3,
+        computedTip: '0.44',
         total: '3.02',
-        porPessoa: '1.01',
+        perPerson: '1.01',
       },
     ]
 
@@ -179,8 +179,8 @@ describe('E2E: Desktop', () => {
       }).as('getUsdRate')
     })
 
-    testCases.forEach(({ conta, gorjeta, pessoas, gorjetacalculada, total, porPessoa }) => {
-      it(`deve calcular corretamente em USD para conta=${conta}, gorjeta=${gorjeta}% e pessoas=${pessoas}`, () => {
+    testCases.forEach(({ amount, tip, people, computedTip, total, perPerson }) => {
+      it(`Should calculate correctly to USD for amount=${amount}, tip=${tip}% and people=${people}`, () => {
         cy.get('header').should('be.visible')
 
         const amountInputFieldSelector = '[data-testid="input-amount"] input.input-money__field'
@@ -189,24 +189,24 @@ describe('E2E: Desktop', () => {
         cy.get('[data-testid="switch-currency"]').click()
 
         cy.get(amountInputFieldSelector).clear()
-        cy.get(amountInputFieldSelector).type(conta)
+        cy.get(amountInputFieldSelector).type(amount)
 
         cy.get('[data-testid="tip-input-range"] input[type="range"]')
-          .invoke('val', gorjeta)
+          .invoke('val', tip)
           .trigger('input')
 
         cy.get('[data-testid="people-input-range"] input[type="range"]')
-          .invoke('val', pessoas)
+          .invoke('val', people)
           .trigger('input')
 
         cy.wait('@getUsdRate')
 
         cy.get('[data-testeid="floating-button"]').should('not.exist')
 
-        cy.get(resultAmount).eq(0).should('contain.text', conta)
-        cy.get(resultAmount).eq(1).should('contain.text', gorjetacalculada)
+        cy.get(resultAmount).eq(0).should('contain.text', amount)
+        cy.get(resultAmount).eq(1).should('contain.text', computedTip)
         cy.get(resultAmount).eq(2).should('contain.text', total)
-        cy.get(resultAmount).eq(3).should('contain.text', porPessoa)
+        cy.get(resultAmount).eq(3).should('contain.text', perPerson)
 
         cy.get('[data-testid="result-in-brl"] .computability-result__icon--loading').should(
           'not.exist',
@@ -219,14 +219,14 @@ describe('E2E: Desktop', () => {
 })
 
 describe('E2E: Mobile', () => {
-  describe('Validação da troca de Tema', () => {
+  describe('Validation of the theme change', () => {
     beforeEach(() => {
       cy.viewport('iphone-x')
 
       cy.visit('/')
     })
 
-    it(`Deve mudar o tema de Light para Dark`, () => {
+    it(`Should change the theme from Light to Dark.`, () => {
       cy.get('header').should('be.visible')
 
       cy.get('.header__theme').click()
@@ -234,7 +234,7 @@ describe('E2E: Mobile', () => {
       cy.get('.header__theme--moon').should('exist')
     })
 
-    it(`Deve mudar o tema de Light para Dark, Dark para Light`, () => {
+    it(`Should change the theme from Light to Dark, from Dark to Light`, () => {
       cy.get('header').should('be.visible')
 
       cy.get('.header__theme').click()
@@ -245,7 +245,25 @@ describe('E2E: Mobile', () => {
     })
   })
 
-  describe('Interação Completa e Verificação de Resultados (EUR)', () => {
+  describe('Switching between panels, [Entry Panel -> Result Panel -> Entry Panel]', () => {
+    beforeEach(() => {
+      cy.viewport('iphone-x')
+
+      cy.visit('/')
+    })
+
+    it(`Should change the theme from Light to Dark.`, () => {
+      cy.get('[data-testid="input-amount"] input.input-money__field').should('be.visible')
+
+      cy.get('[data-testeid="floating-button"]').trigger('click')
+      cy.get('.computability-result .computability-result__result').eq(0).should('be.visible')
+
+      cy.get('[data-testeid="floating-button"]').trigger('click')
+      cy.get('[data-testid="input-amount"] input.input-money__field').should('be.visible')
+    })
+  })
+
+  describe('Full Interaction and Results Verification (EUR)', () => {
     const MOCK_EUR_RATE_RESPONSE = {
       EURBRL: {
         code: 'EUR',
@@ -259,36 +277,36 @@ describe('E2E: Mobile', () => {
 
     const testCases = [
       {
-        conta: '73,23',
-        gorjeta: 13,
-        pessoas: 10,
-        gorjetacalculada: '9,52',
+        amount: '73,23',
+        tip: 13,
+        people: 10,
+        computedTip: '9,52',
         total: '82,75',
-        porPessoa: '8,28',
+        perPerson: '8,28',
       },
       {
-        conta: '60,00',
-        gorjeta: 10,
-        pessoas: 3,
-        gorjetacalculada: '6,00',
+        amount: '60,00',
+        tip: 10,
+        people: 3,
+        computedTip: '6,00',
         total: '66,00',
-        porPessoa: '22,00',
+        perPerson: '22,00',
       },
       {
-        conta: '13,00',
-        gorjeta: 15,
-        pessoas: 2,
-        gorjetacalculada: '1,95',
+        amount: '13,00',
+        tip: 15,
+        people: 2,
+        computedTip: '1,95',
         total: '14,95',
-        porPessoa: '7,48',
+        perPerson: '7,48',
       },
       {
-        conta: '2,58',
-        gorjeta: 17,
-        pessoas: 3,
-        gorjetacalculada: '0,44',
+        amount: '2,58',
+        tip: 17,
+        people: 3,
+        computedTip: '0,44',
         total: '3,02',
-        porPessoa: '1,01',
+        perPerson: '1,01',
       },
     ]
 
@@ -305,21 +323,21 @@ describe('E2E: Mobile', () => {
       }).as('getEurRate')
     })
 
-    testCases.forEach(({ conta, gorjeta, pessoas, gorjetacalculada, total, porPessoa }) => {
-      it(`deve calcular corretamente para conta=${conta}, gorjeta=${gorjeta}% e pessoas=${pessoas}`, () => {
+    testCases.forEach(({ amount, tip, people, computedTip, total, perPerson }) => {
+      it(`Should calculate correctly for amount=${amount}, tip=${tip}% e people=${people}`, () => {
         cy.get('header').should('be.visible')
 
         const amountInputFieldSelector = '[data-testid="input-amount"] input.input-money__field'
 
         cy.get(amountInputFieldSelector).clear()
-        cy.get(amountInputFieldSelector).type(conta)
+        cy.get(amountInputFieldSelector).type(amount)
 
         cy.get('[data-testid="tip-input-range"] input[type="range"]')
-          .invoke('val', gorjeta)
+          .invoke('val', tip)
           .trigger('input')
 
         cy.get('[data-testid="people-input-range"] input[type="range"]')
-          .invoke('val', pessoas)
+          .invoke('val', people)
           .trigger('input')
 
         cy.wait('@getEurRate')
@@ -328,10 +346,10 @@ describe('E2E: Mobile', () => {
 
         const resultAmount = '.computability-result .computability-result__result'
 
-        cy.get(resultAmount).eq(0).should('contain.text', conta.replace('.', ','))
-        cy.get(resultAmount).eq(1).should('contain.text', gorjetacalculada)
+        cy.get(resultAmount).eq(0).should('contain.text', amount.replace('.', ','))
+        cy.get(resultAmount).eq(1).should('contain.text', computedTip)
         cy.get(resultAmount).eq(2).should('contain.text', total)
-        cy.get(resultAmount).eq(3).should('contain.text', porPessoa)
+        cy.get(resultAmount).eq(3).should('contain.text', perPerson)
         cy.get('[data-testid="result-in-brl"] .computability-result__icon--loading').should(
           'not.exist',
         )
@@ -339,7 +357,7 @@ describe('E2E: Mobile', () => {
     })
   })
 
-  describe('Interação Completa e Verificação de Resultados (USD)', () => {
+  describe('Full Interaction and Results Verification (USD)', () => {
     const MOCK_USD_RATE_RESPONSE = {
       USDBRL: {
         code: 'USD',
@@ -353,36 +371,36 @@ describe('E2E: Mobile', () => {
 
     const testCases = [
       {
-        conta: '73.23',
-        gorjeta: 13,
-        pessoas: 10,
-        gorjetacalculada: '9.52',
+        amount: '73.23',
+        tip: 13,
+        people: 10,
+        computedTip: '9.52',
         total: '82.75',
-        porPessoa: '8.28',
+        perPerson: '8.28',
       },
       {
-        conta: '60.00',
-        gorjeta: 10,
-        pessoas: 3,
-        gorjetacalculada: '6.00',
+        amount: '60.00',
+        tip: 10,
+        people: 3,
+        computedTip: '6.00',
         total: '66.00',
-        porPessoa: '22.00',
+        perPerson: '22.00',
       },
       {
-        conta: '13.00',
-        gorjeta: 15,
-        pessoas: 2,
-        gorjetacalculada: '1.95',
+        amount: '13.00',
+        tip: 15,
+        people: 2,
+        computedTip: '1.95',
         total: '14.95',
-        porPessoa: '7.48',
+        perPerson: '7.48',
       },
       {
-        conta: '2.58',
-        gorjeta: 17,
-        pessoas: 3,
-        gorjetacalculada: '0.44',
+        amount: '2.58',
+        tip: 17,
+        people: 3,
+        computedTip: '0.44',
         total: '3.02',
-        porPessoa: '1.01',
+        perPerson: '1.01',
       },
     ]
 
@@ -399,8 +417,8 @@ describe('E2E: Mobile', () => {
       }).as('getUsdRate')
     })
 
-    testCases.forEach(({ conta, gorjeta, pessoas, gorjetacalculada, total, porPessoa }) => {
-      it(`deve calcular corretamente em USD para conta=${conta}, gorjeta=${gorjeta}% e pessoas=${pessoas}`, () => {
+    testCases.forEach(({ amount, tip, people, computedTip, total, perPerson }) => {
+      it(`Should calculate correctly in USD for account=${amount}, tip=${tip}% and people=${people}`, () => {
         cy.get('header').should('be.visible')
 
         const amountInputFieldSelector = '[data-testid="input-amount"] input.input-money__field'
@@ -409,24 +427,24 @@ describe('E2E: Mobile', () => {
         cy.get('[data-testid="switch-currency"]').click()
 
         cy.get(amountInputFieldSelector).clear()
-        cy.get(amountInputFieldSelector).type(conta)
+        cy.get(amountInputFieldSelector).type(amount)
 
         cy.get('[data-testid="tip-input-range"] input[type="range"]')
-          .invoke('val', gorjeta)
+          .invoke('val', tip)
           .trigger('input')
 
         cy.get('[data-testid="people-input-range"] input[type="range"]')
-          .invoke('val', pessoas)
+          .invoke('val', people)
           .trigger('input')
 
         cy.wait('@getUsdRate')
 
         cy.get('[data-testeid="floating-button"]').trigger('click')
 
-        cy.get(resultAmount).eq(0).should('contain.text', conta)
-        cy.get(resultAmount).eq(1).should('contain.text', gorjetacalculada)
+        cy.get(resultAmount).eq(0).should('contain.text', amount)
+        cy.get(resultAmount).eq(1).should('contain.text', computedTip)
         cy.get(resultAmount).eq(2).should('contain.text', total)
-        cy.get(resultAmount).eq(3).should('contain.text', porPessoa)
+        cy.get(resultAmount).eq(3).should('contain.text', perPerson)
 
         cy.get('[data-testid="result-in-brl"] .computability-result__icon--loading').should(
           'not.exist',
